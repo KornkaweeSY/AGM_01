@@ -1,0 +1,110 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+  output   = "../generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id            String    @id @default(cuid())
+  email         String    @unique
+  name          String
+  password      String
+  role          UserRole  @default(SHAREHOLDER)
+  shares        Int       @default(0)
+  votes         Vote[]
+  questions     Question[]
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+}
+
+model Meeting {
+  id            String    @id @default(cuid())
+  title         String
+  description   String
+  startDate     DateTime
+  endDate       DateTime
+  status        MeetingStatus @default(UPCOMING)
+  agendaItems   AgendaItem[]
+  questions     Question[]
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+}
+
+model AgendaItem {
+  id            String    @id @default(cuid())
+  title         String
+  description   String
+  meetingId     String
+  meeting       Meeting   @relation(fields: [meetingId], references: [id])
+  votes         Vote[]
+  status        AgendaStatus @default(PENDING)
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+}
+
+model Vote {
+  id            String    @id @default(cuid())
+  userId        String
+  user          User      @relation(fields: [userId], references: [id])
+  agendaItemId  String
+  agendaItem    AgendaItem @relation(fields: [agendaItemId], references: [id])
+  voteChoice    VoteChoice
+  shareCount    Int
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+}
+
+model Question {
+  id            String    @id @default(cuid())
+  content       String
+  userId        String
+  user          User      @relation(fields: [userId], references: [id])
+  meetingId     String
+  meeting       Meeting   @relation(fields: [meetingId], references: [id])
+  status        QuestionStatus @default(PENDING)
+  answer        String?
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+}
+
+enum UserRole {
+  ADMIN
+  MODERATOR
+  SHAREHOLDER
+}
+
+enum MeetingStatus {
+  UPCOMING
+  ONGOING
+  COMPLETED
+  CANCELLED
+}
+
+enum AgendaStatus {
+  PENDING
+  ACTIVE
+  COMPLETED
+  CANCELLED
+}
+
+enum VoteChoice {
+  APPROVE
+  DISAPPROVE
+  ABSTAIN
+}
+
+enum QuestionStatus {
+  PENDING
+  ANSWERED
+  REJECTED
+}
