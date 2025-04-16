@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-white">
+  <div class="h-screen bg-white">
     <div class="px-4 sm:px-6 lg:px-8">
       <div class="sm:flex sm:items-center">
         <div class="sm:flex-auto">
@@ -71,7 +71,7 @@ const meetings = ref([
     id: '2',
     title: 'การประชุมวิสามัญผู้ถือหุ้น ครั้งที่ 1/2567',
     startDate: '2025-06-30T13:30:00',
-    status: 'UPCOMING'
+    status: 'ONGOING'
   }
 ])
 

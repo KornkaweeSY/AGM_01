@@ -32,7 +32,7 @@
       <NuxtPage />
     </main>
 
-    <footer class="bg-white">
+    <footer class="bg-white flex items-end">
       <div class="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
         <p class="text-center text-sm text-gray-500">
           &copy; {{ new Date().getFullYear() }} AGM Online. All rights reserved.

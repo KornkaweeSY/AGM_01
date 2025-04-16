@@ -59,7 +59,7 @@
 // Mock user data
 const user = ref({
   name: 'คุณสมชาย ใจดี',
-  email: 'somchai@example.com',
+  email: 'somchai@gamil.com',
   shares: 10000,
   role: 'SHAREHOLDER'
 })
