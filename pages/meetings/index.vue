@@ -1,5 +1,5 @@
 <template>
-  <div class="h-screen bg-white">
+  <div class="h-full bg-white">
     <div class="px-4 sm:px-6 lg:px-8">
       <div class="sm:flex sm:items-center">
         <div class="sm:flex-auto">
@@ -62,7 +62,7 @@
 <script setup>
 const meetings = ref([
   {
-    id: '1',
+    id: 'agenda',
     title: 'การประชุมสามัญผู้ถือหุ้นประจำปี 2567',
     startDate: '2025-05-15T09:00:00',
     status: 'UPCOMING'

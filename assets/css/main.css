@@ -4,6 +4,29 @@
 
 @layer base {
   html {
-    font-family: 'Sarabun', system-ui, sans-serif;
+    /* font-family: 'Sarabun', system-ui, sans-serif; */
+    font-family: 'Noto Sans Thai', sans-serif;
   }
+}
+
+/* assets/css/main.css */
+.custom-radio {
+  @apply appearance-none h-5 w-5 border border-gray-300 rounded-full;
+  @apply checked:bg-indigo-600 checked:border-transparent;
+  @apply focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2;
+  @apply transition-all duration-200 ease-in-out;
+  position: relative;
+}
+
+.custom-radio:checked::after {
+  content: "";
+  @apply absolute inset-0 h-2 w-2 m-auto rounded-full bg-white;
+}
+
+.custom-radio:hover {
+  @apply cursor-pointer border-indigo-500;
+}
+
+.custom-label:hover {
+  @apply cursor-pointer text-indigo-600;
 }
